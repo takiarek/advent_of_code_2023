@@ -2,6 +2,7 @@ require "json"
 require "debug"
 
 require_relative "line"
+require_relative "potential_part"
 
 class EngineSchematic
   def initialize(input: "../inputs/3/input.txt")
@@ -27,10 +28,12 @@ class EngineSchematic
   def find_potential_parts
     lines.each_with_object({}).with_index do |(line, hash), line_index|
       hash[line_index] = line.numbers.map do |number|
+        potential_part = PotentialPart.new(line, number)
+
         {
-          number: number,
-          start_index: lines[line_index].value.index(number),
-          end_index: lines[line_index].value.index(number) + number.length - 1
+          number: potential_part.number,
+          start_index: lines[line_index].value.index(potential_part.number),
+          end_index: lines[line_index].value.index(potential_part.number) + potential_part.number.length - 1
         }
       end
     end
