@@ -11,9 +11,7 @@ class EngineSchematic
   def parts_sum
     lines_with_potential_parts = find_potential_parts
 
-    real_parts = find_real_parts(lines_with_potential_parts)
-
-    real_parts.sum do |part|
+    find_real_parts.sum do |part|
       part.to_h[:number].to_i
     end
   end
@@ -30,7 +28,7 @@ class EngineSchematic
     end
   end
 
-  def find_real_parts(lines_with_potential_parts)
+  def find_real_parts
     lines.map.with_index do |current_line, line_index|
       current_line.potential_parts.select do |part|
         next true if symbol?(current_line.value[part.to_h[:start_index] - 1]) || symbol?(current_line.value[part.to_h[:end_index] + 1])
