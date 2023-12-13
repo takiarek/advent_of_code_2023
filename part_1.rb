@@ -33,10 +33,14 @@ class EngineSchematic
         {
           number: potential_part.number,
           start_index: potential_part.start_index,
-          end_index: lines[line_index].value.index(potential_part.number) + potential_part.number.length - 1
+          end_index: number_end_index(lines[line_index], potential_part.number)
         }
       end
     end
+  end
+
+  def number_end_index(line, number)
+    line.value.index(number) + number.length - 1
   end
 
   def find_real_parts(lines_with_potential_parts)
