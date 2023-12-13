@@ -45,11 +45,7 @@ class EngineSchematic
   end
 
   def lines_numbers
-    lines.map { |line| get_numbers(line.value) }
-  end
-
-  def get_numbers(line)
-    line.scan(/\d*/).reject(&:empty?)
+    lines.map { |line| line.numbers }
   end
 
   def find_real_parts(lines_with_potential_parts)

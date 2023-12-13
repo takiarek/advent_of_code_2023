@@ -4,4 +4,8 @@ class Line
   def initialize(value)
     @value = value
   end
+
+  def numbers
+    value.scan(/\d*/).reject(&:empty?)
+  end
 end
