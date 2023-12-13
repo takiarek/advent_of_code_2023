@@ -1,6 +1,8 @@
 require "json"
 require "debug"
 
+require_relative "line"
+
 class EngineSchematic
   def initialize(input: "../inputs/3/input.txt")
     @lines = File.readlines(input)
@@ -18,7 +20,9 @@ class EngineSchematic
 
   private
 
-  attr_reader :lines
+  def lines
+    @lines.map { |line| Line.new(line).value }
+  end
 
   def find_potential_parts
     lines_of_numbers.each_with_object({}) do |(line_index, numbers), hash|
