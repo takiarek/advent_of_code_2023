@@ -31,10 +31,9 @@ class EngineSchematic
   end
 
   def find_real_parts(lines_with_potential_parts)
-    lines_with_potential_parts.map do |line_index, potential_parts|
-      potential_parts.select do |part|
-        current_line = lines[line_index].value
-        next true if symbol?(current_line[part.to_h[:start_index] - 1]) || symbol?(current_line[part.to_h[:end_index] + 1])
+    lines.map.with_index do |current_line, line_index|
+      current_line.potential_parts.select do |part|
+        next true if symbol?(current_line.value[part.to_h[:start_index] - 1]) || symbol?(current_line.value[part.to_h[:end_index] + 1])
 
         other_lines = case line_index
         when 0
