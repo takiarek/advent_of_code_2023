@@ -32,7 +32,7 @@ class EngineSchematic
 
         {
           number: potential_part.number,
-          start_index: lines[line_index].value.index(potential_part.number),
+          start_index: potential_part.start_index,
           end_index: lines[line_index].value.index(potential_part.number) + potential_part.number.length - 1
         }
       end
