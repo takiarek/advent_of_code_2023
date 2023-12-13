@@ -37,15 +37,11 @@ class EngineSchematic
   end
 
   def lines_of_numbers
-    lines_numbers.each_with_object({}).with_index do |(numbers, hash), index|
-      next if numbers.empty?
+    lines.each_with_object({}).with_index do |(line, hash), index|
+      next if line.numbers.empty?
 
-      hash[index] = numbers
+      hash[index] = line.numbers
     end
-  end
-
-  def lines_numbers
-    lines.map { |line| line.numbers }
   end
 
   def find_real_parts(lines_with_potential_parts)
