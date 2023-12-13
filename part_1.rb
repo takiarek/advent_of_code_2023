@@ -14,7 +14,7 @@ class EngineSchematic
     real_parts = find_real_parts(lines_with_potential_parts)
 
     real_parts.sum do |part|
-      part[:number].to_i
+      part.to_h[:number].to_i
     end
   end
 
@@ -34,7 +34,7 @@ class EngineSchematic
     lines_with_potential_parts.map do |line_index, potential_parts|
       potential_parts.select do |part|
         current_line = lines[line_index].value
-        next true if symbol?(current_line[part[:start_index] - 1]) || symbol?(current_line[part[:end_index] + 1])
+        next true if symbol?(current_line[part.to_h[:start_index] - 1]) || symbol?(current_line[part.to_h[:end_index] + 1])
 
         other_lines = case line_index
         when 0
@@ -48,8 +48,8 @@ class EngineSchematic
         other_lines.any? do |other_line|
           line = lines[line_index + other_line].value
 
-          start = [part[:start_index] - 1, 0].max
-          finish = [part[:end_index] + 1, line.length - 1].min
+          start = [part.to_h[:start_index] - 1, 0].max
+          finish = [part.to_h[:end_index] + 1, line.length - 1].min
 
           line[start..finish].split.any? { |char| symbol?(char) }
         end

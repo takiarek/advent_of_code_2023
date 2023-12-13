@@ -8,7 +8,7 @@ class Line
   end
 
   def potential_parts
-    numbers.map { |number| PotentialPart.new(self, number).to_h }
+    numbers.map { |number| PotentialPart.new(self, number) }
   end
 
   private
