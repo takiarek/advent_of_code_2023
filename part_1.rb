@@ -25,22 +25,14 @@ class EngineSchematic
   end
 
   def find_potential_parts
-    lines_of_numbers.each_with_object({}) do |(line_index, numbers), hash|
-      hash[line_index] = numbers.map do |number|
+    lines.each_with_object({}).with_index do |(line, hash), line_index|
+      hash[line_index] = line.numbers.map do |number|
         {
           number: number,
           start_index: lines[line_index].value.index(number),
           end_index: lines[line_index].value.index(number) + number.length - 1
         }
       end
-    end
-  end
-
-  def lines_of_numbers
-    lines.each_with_object({}).with_index do |(line, hash), index|
-      next if line.numbers.empty?
-
-      hash[index] = line.numbers
     end
   end
 
