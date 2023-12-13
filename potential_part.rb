@@ -9,6 +9,10 @@ class PotentialPart
     line.value.index(number)
   end
 
+  def end_index
+    line.value.index(number) + number.length - 1
+  end
+
   private
 
   attr_reader :line
