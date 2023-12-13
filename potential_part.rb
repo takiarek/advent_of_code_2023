@@ -5,6 +5,14 @@ class PotentialPart
     @line, @number = line, number
   end
 
+  def to_h
+    {
+      number: number,
+      start_index: start_index,
+      end_index: end_index
+    }
+  end
+
   def start_index
     line.value.index(number)
   end

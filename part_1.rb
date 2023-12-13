@@ -28,13 +28,7 @@ class EngineSchematic
   def find_potential_parts
     lines.each_with_object({}).with_index do |(line, hash), line_index|
       hash[line_index] = line.numbers.map do |number|
-        potential_part = PotentialPart.new(line, number)
-
-        {
-          number: potential_part.number,
-          start_index: potential_part.start_index,
-          end_index: potential_part.end_index
-        }
+        PotentialPart.new(line, number).to_h
       end
     end
   end
