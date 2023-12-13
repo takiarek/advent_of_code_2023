@@ -9,8 +9,6 @@ class EngineSchematic
   end
 
   def parts_sum
-    lines_with_potential_parts = find_potential_parts
-
     find_real_parts.sum do |part|
       part.to_h[:number].to_i
     end
@@ -20,12 +18,6 @@ class EngineSchematic
 
   def lines
     @lines.map { |line| Line.new(line) }
-  end
-
-  def find_potential_parts
-    lines.each_with_object({}).with_index do |(line, hash), line_index|
-      hash[line_index] = line.potential_parts
-    end
   end
 
   def find_real_parts
