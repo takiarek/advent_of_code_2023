@@ -42,4 +42,4 @@ class EngineSchematic
   end
 end
 
-# puts EngineSchematic.new.parts_sum
+puts EngineSchematic.new.parts_sum
