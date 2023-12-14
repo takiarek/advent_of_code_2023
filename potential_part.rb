@@ -5,7 +5,7 @@ class PotentialPart
     @line, @number = line, number
   end
 
-  def neighbourhood
+  def neighbourhood_boundries
     neighbourhood_start..neighbourhood_finish
   end
 
