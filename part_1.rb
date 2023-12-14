@@ -38,11 +38,7 @@ class EngineSchematic
   end
 
   def adjacent_symbols?(potential_part, line)
-    line.value[potential_part.neighbourhood_boundries].split.any? { |char| symbol?(char) }
-  end
-
-  def symbol?(character)
-    character.match?(/[^.^\d\s]/)
+    line.value[potential_part.neighbourhood_boundries].split.any? { |char| char.match?(/[^.^\d\s]/) }
   end
 end
 
