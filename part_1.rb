@@ -21,13 +21,17 @@ class EngineSchematic
   end
 
   def real_parts
-    lines.map.with_index do |current_line, line_index|
-      current_line.potential_parts.select do |part|
-        neighbourhood_lines(current_line, line_index).any? do |line|
-          line.adjacent_symbols_to?(part)
-        end
-      end
+    lines.map.with_index do |line, line_index|
+      line_real_parts(line, line_index)
     end.flatten
+  end
+
+  def line_real_parts(line, line_index)
+    line.potential_parts.select do |part|
+      neighbourhood_lines(line, line_index).any? do |neighbourhood_line|
+        neighbourhood_line.adjacent_symbols_to?(part)
+      end
+    end
   end
 
   def neighbourhood_lines(line, line_index)
