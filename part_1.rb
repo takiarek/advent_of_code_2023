@@ -38,13 +38,15 @@ class EngineSchematic
   end
 
   def adjacent_symbols?(potential_part, line)
-    finish = [potential_part.end_index + 1, line.value.length - 1].min
-
-    line.value[part_neighbourhood_start(potential_part)..finish].split.any? { |char| symbol?(char) }
+    line.value[part_neighbourhood_start(potential_part)..part_neighbourhood_finish(potential_part, line)].split.any? { |char| symbol?(char) }
   end
 
   def part_neighbourhood_start(potential_part)
     [potential_part.start_index - 1, 0].max
+  end
+
+  def part_neighbourhood_finish(potential_part, line)
+    [potential_part.end_index + 1, line.value.length - 1].min
   end
 
   def symbol?(character)
