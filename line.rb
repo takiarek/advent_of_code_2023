@@ -4,7 +4,7 @@ class Line
   attr_reader :value
 
   def initialize(value)
-    @value = value
+    @value = value.strip
   end
 
   def potential_parts
