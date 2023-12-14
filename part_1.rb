@@ -24,10 +24,7 @@ class EngineSchematic
     lines.map.with_index do |current_line, line_index|
       current_line.potential_parts.select do |part|
         neighbourhood_lines(current_line, line_index).any? do |line|
-          start = [part.start_index - 1, 0].max
-          finish = [part.end_index + 1, line.value.length - 1].min
-
-          line.value[start..finish].split.any? { |char| symbol?(char) }
+          adjacent_symbols?(part, line)
         end
       end
     end.flatten
@@ -38,6 +35,13 @@ class EngineSchematic
     finish = [line_index + 1, lines.length - 1].min
 
     lines[start..finish]
+  end
+
+  def adjacent_symbols?(potential_part, line)
+    start = [potential_part.start_index - 1, 0].max
+    finish = [potential_part.end_index + 1, line.value.length - 1].min
+
+    line.value[start..finish].split.any? { |char| symbol?(char) }
   end
 
   def symbol?(character)
