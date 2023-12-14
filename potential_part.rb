@@ -20,7 +20,7 @@ class PotentialPart
   end
 
   def end_index
-    line.value.index(number) + number.length - 1
+    start_index + number.length - 1
   end
 
   private
