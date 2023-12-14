@@ -1,7 +1,7 @@
 class PotentialPart
   attr_reader :number, :start_index
 
-  def initialize(line, number, start_index)
+  def initialize(number, start_index)
     @number, @start_index = number, start_index
   end
 
