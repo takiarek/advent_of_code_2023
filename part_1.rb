@@ -38,7 +38,11 @@ class EngineSchematic
   end
 
   def adjacent_symbols?(potential_part, line)
-    line.value[part_neighbourhood_start(potential_part)..part_neighbourhood_finish(potential_part, line)].split.any? { |char| symbol?(char) }
+    line.value[part_neighbourhood(potential_part, line)].split.any? { |char| symbol?(char) }
+  end
+
+  def part_neighbourhood(potential_part, line)
+    part_neighbourhood_start(potential_part)..part_neighbourhood_finish(potential_part, line)
   end
 
   def part_neighbourhood_start(potential_part)
