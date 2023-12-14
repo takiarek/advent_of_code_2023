@@ -8,7 +8,9 @@ class Line
   end
 
   def potential_parts
-    numbers.map { |number| PotentialPart.new(number, value.index(number)) }
+    numbers.map do |number|
+      PotentialPart.new(number, start_index(number))
+    end
   end
 
   def adjacent_symbols_to?(potential_part)
@@ -19,5 +21,9 @@ class Line
 
   def numbers
     value.scan(/\d*/).reject(&:empty?)
+  end
+
+  def start_index(number)
+    value.index(number)
   end
 end
