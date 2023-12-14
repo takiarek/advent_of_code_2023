@@ -16,7 +16,7 @@ class PotentialPart
   end
 
   def neighbourhood_finish
-    [end_index + 1, line.value.length - 1].min
+    end_index + 1
   end
 
   def start_index
