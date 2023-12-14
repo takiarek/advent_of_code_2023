@@ -8,8 +8,14 @@ class Line
   end
 
   def potential_parts
+    string = value
+
     numbers.map do |number|
-      PotentialPart.new(number, start_index(number))
+      start_index = string.index(number)
+
+      string.sub!(number, "." * number.size)
+
+      PotentialPart.new(number, start_index)
     end
   end
 
@@ -21,9 +27,5 @@ class Line
 
   def numbers
     value.scan(/\d*/).reject(&:empty?)
-  end
-
-  def start_index(number)
-    value.index(number)
   end
 end
