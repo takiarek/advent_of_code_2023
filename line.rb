@@ -8,7 +8,7 @@ class Line
   end
 
   def potential_parts
-    numbers.map { |number| PotentialPart.new(self, number) }
+    numbers.map { |number| PotentialPart.new(self, number, value.index(number)) }
   end
 
   def adjacent_symbols_to?(potential_part)

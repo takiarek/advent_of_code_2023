@@ -1,8 +1,8 @@
 class PotentialPart
-  attr_reader :number
+  attr_reader :number, :start_index
 
-  def initialize(line, number)
-    @line, @number = line, number
+  def initialize(line, number, start_index)
+    @line, @number, @start_index = line, number, start_index
   end
 
   def neighbourhood_boundries
@@ -17,10 +17,6 @@ class PotentialPart
 
   def neighbourhood_finish
     end_index + 1
-  end
-
-  def start_index
-    line.value.index(number)
   end
 
   def end_index
