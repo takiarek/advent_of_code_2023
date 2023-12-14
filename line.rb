@@ -11,6 +11,10 @@ class Line
     numbers.map { |number| PotentialPart.new(self, number) }
   end
 
+  def adjacent_symbols_to?(potential_part)
+    value[potential_part.neighbourhood_boundries].split.any? { |char| char.match?(/[^.^\d\s]/) }
+  end
+
   private
 
   def numbers
