@@ -21,9 +21,9 @@ class EngineSchematic
   end
 
   def real_parts
-    lines.map.with_index do |line, line_index|
+    lines.flat_map.with_index do |line, line_index|
       line_real_parts(line, line_index)
-    end.flatten
+    end
   end
 
   def line_real_parts(line, line_index)
