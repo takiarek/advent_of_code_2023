@@ -14,6 +14,10 @@ class EngineSchematic
     end
   end
 
+  def gear_ratios_sum
+    gear_ratios.sum
+  end
+
   private
 
   def lines
@@ -31,6 +35,36 @@ class EngineSchematic
       neighbourhood_lines(line, line_index).any? do |neighbourhood_line|
         neighbourhood_line.adjacent_symbols_to?(part)
       end
+    end
+  end
+
+  def gear_ratios
+    real_gears.map(&:ratio)
+  end
+
+  def real_gears
+    lines.flat_map.with_index do |line, line_index|
+      line_real_gears(line, line_index)
+    end
+  end
+
+  def line_real_gears(line, line_index)
+    add_adjacent_numbers_to_gears(line, line_index)
+
+    line.potential_gears.select do |gear|
+      gear.adjacent_numbers.count == 2
+    end
+  end
+
+  def add_adjacent_numbers_to_gears(line, line_index)
+    line.potential_gears.each do |gear|
+      adjacent_potential_parts = neighbourhood_lines(line, line_index).flat_map do |neighbourhood_line|
+        neighbourhood_line.potential_parts.select do |potential_part|
+          potential_part.index_range.to_a.intersect?(gear.neighbourhood_boundries.to_a)
+        end
+      end
+
+      gear.add_adjacent_numbers(adjacent_potential_parts.map { |part| part.number.to_i })
     end
   end
 

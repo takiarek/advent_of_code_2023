@@ -9,6 +9,10 @@ class PotentialPart
     neighbourhood_start..neighbourhood_finish
   end
 
+  def index_range
+    start_index..end_index
+  end
+
   private
 
   def neighbourhood_start

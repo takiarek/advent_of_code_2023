@@ -23,7 +23,7 @@ class Line
   def potential_gears
     string = value
 
-    asterisks.map do |asterisk|
+    @potential_gears ||= asterisks.map do |asterisk|
       index = string.index(asterisk)
 
       string = string.sub(asterisk, ".")
