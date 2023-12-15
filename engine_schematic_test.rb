@@ -1,8 +1,8 @@
 require "minitest/autorun"
 
-require_relative "part_1"
+require_relative "engine_schematic"
 
-class Part1Test < Minitest::Test
+class EngineSchematicTest < Minitest::Test
   def test_parts_sum
     assert_equal(4361, EngineSchematic.new(input: "../inputs/3/test_input.txt").parts_sum)
   end
