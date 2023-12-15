@@ -77,3 +77,4 @@ class EngineSchematic
 end
 
 puts EngineSchematic.new.parts_sum
+puts EngineSchematic.new.gear_ratios_sum
