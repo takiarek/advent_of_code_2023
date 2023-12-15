@@ -1,4 +1,5 @@
 require_relative "potential_part"
+require_relative "potential_gear"
 
 class Line
   attr_reader :value
@@ -19,6 +20,18 @@ class Line
     end
   end
 
+  def potential_gears
+    string = value
+
+    asterisks.map do |asterisk|
+      index = string.index(asterisk)
+
+      string.sub!(asterisk, ".")
+
+      PotentialGear.new(index)
+    end
+  end
+
   def adjacent_symbols_to?(potential_part)
     value[potential_part.neighbourhood_boundries].split.any? { |char| char.match?(/[^.^\d\s]/) }
   end
@@ -27,5 +40,9 @@ class Line
 
   def numbers
     value.scan(/\d*/).reject(&:empty?)
+  end
+
+  def asterisks
+    value.scan("*").reject(&:empty?)
   end
 end
