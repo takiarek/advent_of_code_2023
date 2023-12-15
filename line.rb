@@ -14,7 +14,7 @@ class Line
     numbers.map do |number|
       start_index = string.index(number)
 
-      string.sub!(number, "." * number.size)
+      string = string.sub(number, "." * number.size)
 
       PotentialPart.new(number, start_index)
     end
@@ -26,7 +26,7 @@ class Line
     asterisks.map do |asterisk|
       index = string.index(asterisk)
 
-      string.sub!(asterisk, ".")
+      string = string.sub(asterisk, ".")
 
       PotentialGear.new(index)
     end
