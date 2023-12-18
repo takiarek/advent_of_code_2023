@@ -1,3 +1,5 @@
+require_relative "card"
+
 class ProcessCards
   def initialize(input)
     @cards = File.readlines(input).map(&:strip)
@@ -15,7 +17,9 @@ class ProcessCards
 
   private
 
-  attr_reader :cards
+  def cards
+    @cards.map { |card| Card.new(card).to_s }
+  end
 
   def winning_numbers(card)
     winnning_and_my_numbers(card)[0]
