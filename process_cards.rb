@@ -6,7 +6,7 @@ class ProcessCards
   end
 
   def calculate_points
-    cards.sum do |card|
+    cards_strings.sum do |card|
       my_numbers(card).reduce(0) do |points, my_number|
         next points unless winning_numbers(card).include?(my_number)
 
@@ -17,7 +17,7 @@ class ProcessCards
 
   private
 
-  def cards
+  def cards_strings
     @cards.map { |card| Card.new(card).to_s }
   end
 
