@@ -1,12 +1,12 @@
 class ProcessCards
   def initialize(input)
-    @lines = File.readlines(input).map(&:strip)
+    @cards = File.readlines(input).map(&:strip)
   end
 
   def calculate_points
-    lines.sum do |line|
-      my_numbers(line).reduce(0) do |points, my_number|
-        next points unless winning_numbers(line).include?(my_number)
+    cards.sum do |card|
+      my_numbers(card).reduce(0) do |points, my_number|
+        next points unless winning_numbers(card).include?(my_number)
 
         (points == 0) ? points + 1 : points * 2
       end
@@ -15,18 +15,18 @@ class ProcessCards
 
   private
 
-  attr_reader :lines
+  attr_reader :cards
 
-  def winning_numbers(line)
-    winnning_and_my_numbers(line)[0]
+  def winning_numbers(card)
+    winnning_and_my_numbers(card)[0]
   end
 
-  def my_numbers(line)
-    winnning_and_my_numbers(line)[1]
+  def my_numbers(card)
+    winnning_and_my_numbers(card)[1]
   end
 
-  def winnning_and_my_numbers(line)
-    line.split(": ")[1].split(" | ").map do |numbers_string|
+  def winnning_and_my_numbers(card)
+    card.split(": ")[1].split(" | ").map do |numbers_string|
       numbers_string.split(" ")
     end
   end
