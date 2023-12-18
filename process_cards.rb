@@ -30,6 +30,6 @@ class ProcessCards
   end
 
   def winnning_and_my_numbers(card)
-    card.winnning_and_my_numbers(card)
+    card.winnning_and_my_numbers
   end
 end

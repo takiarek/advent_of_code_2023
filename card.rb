@@ -7,7 +7,7 @@ class Card
     @value
   end
 
-  def winnning_and_my_numbers(card)
+  def winnning_and_my_numbers
     to_s.split(": ")[1].split(" | ").map do |numbers_string|
       numbers_string.split(" ")
     end
