@@ -30,8 +30,6 @@ class ProcessCards
   end
 
   def winnning_and_my_numbers(card)
-    card.to_s.split(": ")[1].split(" | ").map do |numbers_string|
-      numbers_string.split(" ")
-    end
+    card.winnning_and_my_numbers(card)
   end
 end
