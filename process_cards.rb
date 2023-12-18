@@ -22,14 +22,10 @@ class ProcessCards
   end
 
   def winning_numbers(card)
-    winnning_and_my_numbers(card)[0]
+    card.winnning_and_my_numbers[0]
   end
 
   def my_numbers(card)
-    winnning_and_my_numbers(card)[1]
-  end
-
-  def winnning_and_my_numbers(card)
-    card.winnning_and_my_numbers
+    card.winnning_and_my_numbers[1]
   end
 end
