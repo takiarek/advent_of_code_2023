@@ -4,9 +4,7 @@ class Card
   end
 
   def points
-    matching_numbers.reduce(0) do |points, _|
-      (points == 0) ? points + 1 : points * 2
-    end
+    matching_numbers_count ^ 2
   end
 
   def matching_numbers_count
