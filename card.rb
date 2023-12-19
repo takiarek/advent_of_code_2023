@@ -11,6 +11,10 @@ class Card
     end
   end
 
+  def matching_numbers_count
+    4
+  end
+
   private
 
   def my_numbers
