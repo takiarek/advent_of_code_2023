@@ -4,9 +4,7 @@ class Card
   end
 
   def points
-    my_numbers.reduce(0) do |points, my_number|
-      next points unless winning_numbers.include?(my_number)
-
+    matching_numbers.reduce(0) do |points, _|
       (points == 0) ? points + 1 : points * 2
     end
   end
