@@ -8,7 +8,7 @@ class ProcessCards
   def calculate_points
     cards.sum do |card|
       card.my_numbers.reduce(0) do |points, my_number|
-        next points unless winning_numbers(card).include?(my_number)
+        next points unless card.winning_numbers.include?(my_number)
 
         (points == 0) ? points + 1 : points * 2
       end
@@ -19,9 +19,5 @@ class ProcessCards
 
   def cards
     @cards.map { |card| Card.new(card) }
-  end
-
-  def winning_numbers(card)
-    card.winnning_and_my_numbers[0]
   end
 end
