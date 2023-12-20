@@ -11,6 +11,10 @@ class Card
     matching_numbers.count
   end
 
+  def number
+    @value.split(": ")[0].split(" ")[1].to_i
+  end
+
   private
 
   def matching_numbers
