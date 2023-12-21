@@ -26,10 +26,12 @@ class ProcessCards
   def cards_count_for(card)
     return 1 if card.matching_numbers_count == 0
 
-    won_copies = cards[card.number..card.number + card.matching_numbers_count - 1]
-
-    won_from_copies_count = won_copies.sum { |copy_card| cards_count_for(copy_card) }
+    won_from_copies_count = won_copies_for(card).sum { |copy_card| cards_count_for(copy_card) }
 
     1 + won_from_copies_count
+  end
+
+  def won_copies_for(card)
+    cards[card.number..card.number + card.matching_numbers_count - 1]
   end
 end
