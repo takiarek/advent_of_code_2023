@@ -3,6 +3,7 @@ require_relative "card"
 class ProcessCards
   def initialize(input)
     @cards = File.readlines(input).map(&:strip)
+    @cached_cards_counts = {}
   end
 
   def calculate_points
@@ -19,14 +20,26 @@ class ProcessCards
 
   private
 
+  attr_reader :cached_cards_counts
+
   def cards
     @cards.map { |card| Card.new(card) }
   end
 
   def cards_count_for(card)
+    return cached_cards_count_for(card) if cached_cards_count_for(card)
+
     return 1 if card.matching_numbers_count == 0
 
-    1 + won_from_copies_count(card)
+    cache_result(card, 1 + won_from_copies_count(card))
+  end
+
+  def cached_cards_count_for(card)
+    cached_cards_counts[card.number]
+  end
+
+  def cache_result(card, result)
+    cached_cards_counts[card.number] = cached_cards_counts[card.number].to_i + result
   end
 
   def won_from_copies_count(card)
