@@ -6,9 +6,6 @@ class Almanac
   end
 
   def nearest_location
-    seeds = almanac_sections.first.split(": ")[1].split.map(&:to_i)
-    maps = almanac_sections[1..almanac_sections.size - 1].collect { |map| map.split(":\n")[1] }
-
     seeds.reduce(999_999_999_999_999_999_999_999) do |lowest_location, seed|
       location = maps.reduce(seed) do |source, map|
         map.split("\n").reduce(nil) do |_, map_part|
@@ -29,4 +26,12 @@ class Almanac
   private
 
   attr_reader :almanac_sections
+
+  def seeds
+    almanac_sections.first.split(": ")[1].split.collect(&:to_i)
+  end
+
+  def maps
+    almanac_sections[1..almanac_sections.size - 1].collect { |map| map.split(":\n")[1] }
+  end
 end
