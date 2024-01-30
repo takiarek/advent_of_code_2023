@@ -9,7 +9,7 @@ class Almanac
   def nearest_location
     seeds.reduce(999_999_999_999_999_999_999_999) do |lowest_location, seed|
       location = maps.reduce(seed) do |source, map|
-        map.find_destination(source, map)
+        map.find_destination(source)
       end
 
       [location, lowest_location].min
