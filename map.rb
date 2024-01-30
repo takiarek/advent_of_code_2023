@@ -4,7 +4,7 @@ class Map
   end
 
   def find_destination(source)
-    @data.split("\n").reduce(nil) do |_, map_part|
+    parts.reduce(nil) do |_, map_part|
       destination_range_start, source_range_start, range_size = map_part.split(" ").collect(&:to_i)
 
       if (source_range_start..source_range_start + range_size - 1).cover?(source)
@@ -13,5 +13,11 @@ class Map
         source
       end
     end
+  end
+
+  private
+
+  def parts
+    @data.split("\n")
   end
 end
