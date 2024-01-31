@@ -27,11 +27,17 @@ class Map
     end
 
     def cover?(source)
-      (source_range_start..source_range_start + range_size - 1).cover?(source)
+      source_range.cover?(source)
     end
 
     def find_destination(source)
       destination_range_start + source - source_range_start
+    end
+
+    private
+
+    def source_range
+      (source_range_start..source_range_start + range_size - 1)
     end
   end
 end
