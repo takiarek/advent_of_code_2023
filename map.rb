@@ -6,7 +6,7 @@ class Map
   def find_destination(source)
     parts.reduce(nil) do |_, map_part|
       if map_part.cover?(source)
-        break map_part.destination_range_start + source - map_part.source_range_start
+        break map_part.find_destination(source)
       else
         source
       end
@@ -28,6 +28,10 @@ class Map
 
     def cover?(source)
       (source_range_start..source_range_start + range_size - 1).cover?(source)
+    end
+
+    def find_destination(source)
+      destination_range_start + source - source_range_start
     end
   end
 end
