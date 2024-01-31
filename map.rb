@@ -4,16 +4,26 @@ class Map
   end
 
   def find_destination(source)
-    parts.reduce(nil) do |_, map_part|
-      if map_part.cover?(source)
-        break map_part.find_destination(source)
-      else
-        source
-      end
+    if source_range.include?(source)
+      destination_range[source_index(source)]
+    else
+      source
     end
   end
 
   private
+
+  def source_range
+    parts.reduce([]) { |range_array, part| range_array + part.source_range.to_a }
+  end
+
+  def destination_range
+    parts.reduce([]) { |range_array, part| range_array + part.destination_range.to_a }
+  end
+
+  def source_index(source)
+    source_range.index(source)
+  end
 
   def parts
     @data.split("\n").collect { |part_data| MapPart.new(part_data) }
@@ -26,26 +36,12 @@ class Map
       @destination_range_start, @source_range_start, @range_size = data.split(" ").collect(&:to_i)
     end
 
-    def cover?(source)
-      source_range.cover?(source)
-    end
-
-    def find_destination(source)
-      destination_range.to_a[source_index(source)]
-    end
-
-    private
-
     def source_range
       (source_range_start..source_range_start + range_size - 1)
     end
 
     def destination_range
       (destination_range_start..destination_range_start + range_size - 1)
-    end
-
-    def source_index(source)
-      source_range.to_a.index(source)
     end
   end
 end
