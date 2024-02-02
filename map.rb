@@ -31,21 +31,13 @@ class Map
     end
 
     def find_destination(source)
-      destination_range.to_a[source_index(source)]
+      destination_range_start + source - source_range_start
     end
 
     private
 
     def source_range
       (source_range_start..source_range_start + range_size - 1)
-    end
-
-    def destination_range
-      (destination_range_start..destination_range_start + range_size - 1)
-    end
-
-    def source_index(source)
-      source_range.to_a.index(source)
     end
   end
 end
