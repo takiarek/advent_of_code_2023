@@ -4,16 +4,22 @@ class Map
   end
 
   def find_destination(source)
-    parts.reduce(nil) do |_, map_part|
-      if map_part.cover?(source)
-        break map_part.find_destination(source)
-      else
-        source
-      end
+    if cover?(source)
+      get_destination(source)
+    else
+      source
     end
   end
 
   private
+
+  def cover?(source)
+    parts.any? { |part| part.cover?(source) }
+  end
+
+  def get_destination(source)
+    parts.find { |part| part.cover?(source) }.find_destination(source)
+  end
 
   def parts
     @data.split("\n").collect { |part_data| MapPart.new(part_data) }
