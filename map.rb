@@ -4,11 +4,7 @@ class Map
   end
 
   def find_destination(source)
-    if cover?(source)
-      get_destination(source)
-    else
-      source
-    end
+    get_destination(source)
   end
 
   private
@@ -22,7 +18,7 @@ class Map
   end
 
   def covering_part(source)
-    parts.find { |part| part.cover?(source) }
+    parts.find { |part| part.cover?(source) } || MirrorMapPart.new
   end
 
   def parts
@@ -48,6 +44,12 @@ class Map
 
     def source_range
       (source_range_start..source_range_start + range_size - 1)
+    end
+  end
+
+  class MirrorMapPart
+    def find_destination(source)
+      source
     end
   end
 end
