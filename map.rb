@@ -18,7 +18,11 @@ class Map
   end
 
   def get_destination(source)
-    parts.find { |part| part.cover?(source) }.find_destination(source)
+    covering_part(source).find_destination(source)
+  end
+
+  def covering_part(source)
+    parts.find { |part| part.cover?(source) }
   end
 
   def parts
